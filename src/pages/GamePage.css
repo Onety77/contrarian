@@ -1,0 +1,17 @@
+.game-page{background:var(--black);}
+.gp-hero{background:var(--black-2);border-bottom:1px solid var(--border);padding:5rem 0 4rem;}
+.gp-hero__title{font-family:var(--font-head);font-size:clamp(4rem,10vw,8rem);font-weight:900;line-height:0.85;letter-spacing:-0.04em;margin:1rem 0 1.5rem;}
+.gp-hero__title em{display:block;font-style:italic;color:var(--gold);}
+.gp-hero__sub{font-family:var(--font-body);font-size:1rem;font-weight:300;color:var(--white-dim);max-width:440px;line-height:1.7;}
+.gp-body{padding:4rem 0 8rem;}
+.gp-info{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);margin-bottom:3rem;}
+.gp-info__card{background:var(--black-2);padding:2rem;}
+.gp-info__n{font-family:var(--font-ui);font-size:0.6rem;font-weight:600;letter-spacing:0.25em;color:var(--gold-dark);display:block;margin-bottom:1rem;}
+.gp-info__t{font-family:var(--font-head);font-size:1.2rem;font-style:italic;font-weight:700;color:var(--white);margin-bottom:0.6rem;}
+.gp-info__d{font-family:var(--font-body);font-size:0.85rem;font-weight:300;color:var(--white-dim);line-height:1.65;}
+.game-module-slot{border:1px dashed rgba(198,168,75,0.18);background:rgba(198,168,75,0.02);padding:6rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;}
+.gp-slot__label{font-family:var(--font-ui);font-size:0.58rem;font-weight:600;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold-dark);border:1px solid rgba(198,168,75,0.2);padding:0.35rem 1rem;}
+.gp-slot__name{font-family:var(--font-head);font-size:clamp(2rem,5vw,3.5rem);font-style:italic;font-weight:700;color:rgba(238,234,226,0.1);}
+.gp-slot__note{font-family:var(--font-body);font-size:0.85rem;font-weight:300;color:rgba(160,152,144,0.5);max-width:380px;line-height:1.7;}
+.gp-slot__note code{font-family:'Courier New',monospace;font-size:0.8rem;color:var(--gold-dark);background:rgba(198,168,75,0.07);padding:0.1rem 0.35rem;}
+@media(max-width:700px){.gp-info{grid-template-columns:1fr;}}

@@ -1,0 +1,183 @@
+.manifesto {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.manifesto__header {
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 5rem;
+}
+
+.manifesto .section-label {
+  color: var(--gold-dim);
+}
+
+.manifesto__body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.manifesto__title-col {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+}
+
+.manifesto__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+.manifesto__title em {
+  font-style: italic;
+  color: var(--gold-dim);
+  display: block;
+}
+
+.manifesto__deck {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.65;
+}
+
+/* Article text */
+.manifesto__text p {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.6vw, 1.18rem);
+  line-height: 1.92;
+  color: #2a2520;
+  margin-bottom: 1.6rem;
+}
+
+.manifesto__text p strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.drop-cap::first-letter {
+  font-size: 5rem;
+  font-weight: 600;
+  float: left;
+  line-height: 0.78;
+  margin-right: 0.1em;
+  margin-top: 0.06em;
+  color: var(--ink);
+}
+
+.manifesto__text h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 3.5rem 0 1.2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.manifesto__quote {
+  margin: 2.5rem 0;
+  padding: 2rem 0 2rem 1.8rem;
+  border-left: 2px solid var(--ink);
+}
+
+.manifesto__quote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem) !important;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink) !important;
+  line-height: 1.5;
+  margin: 0 !important;
+}
+
+.manifesto__quote cite {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 0.8rem;
+  font-style: normal;
+}
+
+.manifesto__ruled {
+  border-left: 2px solid var(--gold-dim);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.manifesto__ruled p {
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem) !important;
+  color: var(--ink) !important;
+  line-height: 1.65;
+  margin: 0 !important;
+}
+
+.manifesto__citation {
+  background: #ede7d9;
+  border-left: 2px solid var(--ink);
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+}
+
+.manifesto__citation p {
+  font-family: var(--font-display);
+  font-size: 1rem !important;
+  font-style: italic;
+  color: #3a3530 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.manifesto__citation span {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.manifesto__closing {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--ink);
+  text-align: center;
+}
+
+.manifesto__closing p {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem) !important;
+  font-style: italic;
+  color: var(--ink) !important;
+  margin: 0 !important;
+}
+
+.manifesto__closing .sub {
+  font-size: 0.95rem !important;
+  color: var(--gray) !important;
+  margin-top: 0.4rem !important;
+}
+
+@media (max-width: 900px) {
+  .manifesto__body {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .manifesto__title-col {
+    position: static;
+  }
+}
