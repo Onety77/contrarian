@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './Home.css'
 
 // UPDATE THESE when live
-const CA      = 'TBA — Contract address will appear here at launch'
+const CA      = 'Coming soon...'
 const TWITTER = 'https://twitter.com/contratoken'
 const X_COMM  = 'https://twitter.com/i/communities/contratoken'
 
