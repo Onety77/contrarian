@@ -8,12 +8,12 @@ const TWITTER = 'https://twitter.com/contratoken'
 const X_COMM  = 'https://twitter.com/i/communities/contratoken'
 
 const TILES = [
-  { num:'01', title:'The Manifesto',        sub:'Who the contrarian is. What they cost. Why history proves them right.',                                 to:'/manifesto',    bg:'bg2.jpg' },
-  { num:'02', title:'Reading Room',         sub:'Essays on independent thought, market psychology, and the history of being right too early.',           to:'/reading-room', bg:null },
-  { num:'03', title:'Consensus vs Reality', sub:'A live archive of what the crowd believed versus what actually happened. The record speaks for itself.',to:'/tracker',      bg:null },
-  { num:'04', title:'The Test',             sub:'Seven pressure scenarios. No right answers. Find out how contrarian you actually are.',                 to:'/test',         bg:null },
-  { num:'05', title:'The Game',             sub:'Can you go against the flow in real time? Most people fold by round five.',                            to:'/game',         bg:null },
-  { num:'06', title:'The Few',              sub:'Put your thesis on record. Timestamped. Public. Let the market decide who was right.',                 to:'/community',    bg:null },
+  { num:'01', title:'The Manifesto',        sub:'Who the contrarian is. What they cost. Why history proves them right.',                                  to:'/manifesto',    bg:'bg2.jpg' },
+  { num:'02', title:'Reading Room',         sub:'Essays on independent thought, market psychology, and the history of being right too early.',            to:'/reading-room', bg:null },
+  { num:'03', title:'Consensus vs Reality', sub:'A live archive of what the crowd believed versus what actually happened. The record speaks for itself.', to:'/tracker',      bg:null },
+  { num:'04', title:'The Test',             sub:'Seven pressure scenarios. No right answers. Find out how contrarian you actually are.',                  to:'/test',         bg:null },
+  { num:'05', title:'The Game',             sub:'Can you go against the flow in real time? Most people fold by round five.',                             to:'/game',         bg:null },
+  { num:'06', title:'The Few',              sub:'Put your thesis on record. Timestamped. Public. Let the market decide who was right.',                  to:'/community',    bg:null },
 ]
 
 const IS_TBA = CA.startsWith('TBA')
@@ -49,12 +49,6 @@ export default function Home() {
 
         <div className="home-hero__content wrap">
 
-          {/* Small brand mark above title */}
-          <div className="home-hero__brand rv">
-            <img src="/logo.png" alt="" className="home-hero__logo" />
-            <span className="home-hero__brand-ticker">$CONTRA</span>
-          </div>
-
           <h1 className="home-hero__title rv d1">
             The<br /><em>Contrarian</em>
           </h1>
@@ -64,7 +58,7 @@ export default function Home() {
             For the ones who were right before anyone was watching.
           </p>
 
-          {/* CA — tappable, copies on click, shows feedback */}
+          {/* CA */}
           <div
             className={`home-hero__ca rv d3${IS_TBA ? ' home-hero__ca--tba' : ' home-hero__ca--live'}`}
             onClick={copyCA}
