@@ -22,11 +22,10 @@ export default function GamePage() {
           <h1 className="gp-hero__title rv d1">Go<br /><em>Against.</em></h1>
           <p className="gp-hero__sub rv d2">
             You are the light. The crowd is the current.<br />
-            Move upstream. Most people fold by round five.
+            Hold to rise. Release to fall. Find the gap.
           </p>
         </div>
       </div>
-
       <div className="gp-body">
         <TheRiver />
       </div>
