@@ -17,10 +17,10 @@ const PLAYER_X       = 155
 //   • Holding sustains upward thrust against gravity
 //   • Releasing gives a smooth gravity arc back down
 //   • No wall riding — boundary = instant death
-const GRAVITY        = 0.55   // downward pull every frame (firm, natural)
+const GRAVITY        = 0.55  // downward pull every frame (firm, natural)
 const LIFT_HOLD      = 0.80   // continuous upward accel while holding
-const TAP_IMPULSE    = -2   // instant vy set on fresh press (GD-style kick)
-const MAX_VY_DOWN    = 8.0    // max fall speed
+const TAP_IMPULSE    = -0.8   // instant vy set on fresh press (GD-style kick)
+const MAX_VY_DOWN    = 5.5   // max fall speed
 const DRAG           = 0.982  // gentle air resistance
 
 const PLAYER_W       = 24
