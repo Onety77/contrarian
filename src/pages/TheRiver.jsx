@@ -15,7 +15,7 @@ const PLAYER_X = 155
 // ═══════════════════════════════════════════════════════════════════════════
 const GRAVITY        = 0.5   // downward accel every frame — higher = heavier fall
 const LIFT_HOLD      = 0.72    // upward accel per frame while holding
-const TAP_IMPULSE    = -3.5    // instant vy on fresh press (negative = up)
+const TAP_IMPULSE    = -0.89    // instant vy on fresh press (negative = up)
 const MAX_VY         = 8.5     // terminal velocity in either direction
 const DRAG           = 0.980   // 0–1 air resistance each frame
 
