@@ -13,9 +13,9 @@ const PLAYER_X = 155
 // ═══════════════════════════════════════════════════════════════════════════
 //  PHYSICS  — tweak only these five numbers
 // ═══════════════════════════════════════════════════════════════════════════
-const GRAVITY        = 0.5   // downward accel every frame — higher = heavier fall
-const LIFT_HOLD      = 0.72    // upward accel per frame while holding
-const TAP_IMPULSE    = -0.89    // instant vy on fresh press (negative = up)
+const GRAVITY        = 0.55    // downward accel every frame — higher = heavier fall
+const LIFT_HOLD      = 0.82    // upward accel per frame while holding
+const TAP_IMPULSE    = -0.9    // instant vy on fresh press (negative = up)
 const MAX_VY         = 8.5     // terminal velocity in either direction
 const DRAG           = 0.980   // 0–1 air resistance each frame
 
@@ -30,18 +30,18 @@ const HITBOX_PAD = 3   // shrink hitbox by this many px each side (forgiveness)
 //  DIFFICULTY TIERS  (exact from your spec)
 // ═══════════════════════════════════════════════════════════════════════════
 const TIERS = [
-  { name:'Easy',          dist:0,     speed:3,  gap:300 },
-  { name:'Normal',        dist:120,   speed:3.2,  gap:200 },
-  { name:'Hard',          dist:280,   speed:3.5,  gap:200 },
-  { name:'Harder',        dist:500,   speed:4,  gap:180 },
-  { name:'Insane',        dist:800,   speed:4.3,  gap:160 },
-  { name:'Extreme',       dist:1200,  speed:4.5,  gap:140  },
-  { name:'Demon',         dist:1800,  speed:5,  gap:135  },
-  { name:'Easy Demon',    dist:2600,  speed:6, gap:130  },
-  { name:'Medium Demon',  dist:3600,  speed:6.5, gap:120  },
-  { name:'Hard Demon',    dist:5000,  speed:6.7, gap:110  },
-  { name:'Insane Demon',  dist:7000,  speed:7, gap:100  },
-  { name:'IMPOSSIBLE',    dist:9999,  speed:10, gap:80  },
+  { name:'Easy',          dist:0,     speed:3.2,  gap:180 },
+  { name:'Normal',        dist:500,   speed:4.0,  gap:160 },
+  { name:'Hard',          dist:900,   speed:5.5,  gap:140 },
+  { name:'Harder',        dist:1500,   speed:6.3,  gap:122 },
+  { name:'Insane',        dist:2200,   speed:7.2,  gap:108 },
+  { name:'Extreme',       dist:3000,  speed:8.2,  gap:95  },
+  { name:'Demon',         dist:4000,  speed:9.4,  gap:84  },
+  { name:'Easy Demon',    dist:4300,  speed:10.6, gap:74  },
+  { name:'Medium Demon',  dist:4800,  speed:12.0, gap:66  },
+  { name:'Hard Demon',    dist:5000,  speed:13.6, gap:58  },
+  { name:'Insane Demon',  dist:7000,  speed:15.2, gap:50  },
+  { name:'IMPOSSIBLE',    dist:9999,  speed:17.5, gap:40  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1350,7 +1350,7 @@ export default function TheRiver() {
         const patName=pickPattern(tier)
         const newObs=makePattern(patName, 0, spd, gap, s.biome, tier)
         s.obstacles.push(...newObs)
-        const frameGap = Math.round(lerpC(300, 90, tier / 11))
+        const frameGap = Math.round(lerpC(300, 80, tier / 11))
         s.patTimer = frameGap
       }
 
@@ -1550,10 +1550,6 @@ export default function TheRiver() {
             <div className="rv-hud-cell rv-hud-center">
               <span className="rv-hud-label">Distance</span>
               <span className="rv-hud-val" style={{color:accentCSS}}>{distance}m</span>
-            </div>
-            <div className="rv-hud-cell rv-hud-coins">
-              <span className="rv-hud-label">Tier</span>
-              <span className="rv-hud-val rv-hud-gold">{tierName}</span>
             </div>
             <div className="rv-hud-cell rv-hud-right">
               <span className="rv-hud-label">Lives</span>
