@@ -1,7 +1,6 @@
 /* ============================================================
-   THE CONTRARIAN — Design System v2
-   Aesthetic: Broadsheet intelligence. Ink and conviction.
-   White page. Black type. One red that means something.
+   THE CONTRARIAN — Design System
+   Broadsheet intelligence. Ink and conviction.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap');
@@ -21,18 +20,27 @@
   --rule:       rgba(10,10,10,0.12);
   --rule-heavy: rgba(10,10,10,0.35);
 
-  --font-serif:  'Libre Baskerville', Georgia, serif;
-  --font-cond:   'Barlow Condensed', sans-serif;
-  --font-body:   'Barlow', sans-serif;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --font-cond:  'Barlow Condensed', sans-serif;
+  --font-body:  'Barlow', sans-serif;
 
-  --nav-h:  60px;
-  --max-w:  1200px;
-  --col-w:  680px;
+  --nav-h: 60px;
+  --max-w: 1200px;
+  --col-w: 680px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   background: var(--page);
@@ -42,6 +50,8 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  width: 100%;
+  min-width: 0;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -56,21 +66,28 @@ img { max-width: 100%; display: block; }
 .wrap {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 .wrap--narrow {
   max-width: var(--col-w);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
-/* ── Rules (horizontal lines) ── */
-.rule       { height: 1px; background: var(--rule); }
+@media (min-width: 640px) {
+  .wrap, .wrap--narrow { padding: 0 1.5rem; }
+}
+@media (min-width: 960px) {
+  .wrap, .wrap--narrow { padding: 0 2rem; }
+}
+
+/* ── Rules ── */
+.rule        { height: 1px; background: var(--rule); }
 .rule--heavy { height: 1px; background: var(--rule-heavy); }
-.rule--red  { height: 2px; background: var(--red); }
+.rule--red   { height: 2px; background: var(--red); }
 .rule--thick { height: 3px; background: var(--ink); }
 
-/* ── Eyebrow label ── */
+/* ── Eyebrow ── */
 .eyebrow {
   font-family: var(--font-cond);
   font-size: 0.62rem;
@@ -91,14 +108,17 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Page shell ── */
-.page { min-height: 100vh; padding-top: var(--nav-h); }
+.page {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+}
 
 /* ── Reveal animation ── */
 .rv {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
-              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+              transform 0.6s cubic-bezier(0.16,1,0.3,1);
 }
 .rv.in { opacity: 1; transform: none; }
 .rv.d1 { transition-delay: 0.06s; }
@@ -108,37 +128,37 @@ img { max-width: 100%; display: block; }
 
 /* ── Buttons ── */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-cond);
   font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  padding: 0.8rem 1.8rem;
+  padding: 0.8rem 1.6rem;
   transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  /* Good tap target */
+  min-height: 44px;
+  white-space: nowrap;
 }
-.btn-ink {
-  background: var(--ink);
-  color: var(--page);
-}
+.btn-ink { background: var(--ink); color: var(--page); }
 .btn-ink:hover { background: var(--ink-2); }
+.btn-ink:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.btn-red {
-  background: var(--red);
-  color: #fff;
-}
+.btn-red { background: var(--red); color: #fff; }
 .btn-red:hover { background: var(--red-dark); }
 
-.btn-outline {
-  border: 1px solid var(--rule-heavy);
-  color: var(--ink);
-}
+.btn-outline { border: 1px solid var(--rule-heavy); color: var(--ink); background: transparent; }
 .btn-outline:hover { border-color: var(--ink); background: var(--ink); color: var(--page); }
 
-/* ── Input ── */
+/* ── Input/Field ── */
 .field {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  /* 16px prevents iOS auto-zoom */
+  font-size: 16px;
   font-weight: 300;
   color: var(--ink);
   background: #fff;
@@ -149,10 +169,7 @@ img { max-width: 100%; display: block; }
   transition: border-color 0.2s;
   border-radius: 0;
   -webkit-appearance: none;
+  appearance: none;
 }
 .field::placeholder { color: var(--ink-faint); }
 .field:focus { border-color: var(--ink); }
-
-@media (max-width: 768px) {
-  .wrap, .wrap--narrow { padding: 0 1.25rem; }
-}

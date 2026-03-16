@@ -1,14 +1,20 @@
+/* ══════════════════════════════
+   MANIFESTO — MOBILE FIRST
+   ══════════════════════════════ */
+
 .mf-page { background: var(--page); }
 
 .mf-hero {
   background: var(--page);
-  padding: 4rem 0 3.5rem;
+  padding: 2.5rem 0 2.5rem;
   border-bottom: 3px solid var(--ink);
 }
 .mf-hero__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin-bottom: 0.5rem;
 }
 .mf-hero__date {
@@ -21,53 +27,54 @@
 }
 .mf-hero__title {
   font-family: var(--font-serif);
-  font-size: clamp(3rem, 9vw, 7rem);
+  font-size: clamp(2.8rem, 11vw, 7rem);
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: -0.02em;
   color: var(--ink);
+  word-break: keep-all;
 }
 .mf-hero__deck {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 3.5vw, 1rem);
   font-weight: 300;
   color: var(--ink-3);
   line-height: 1.7;
-  max-width: 540px;
 }
 
-/* Layout */
-.mf-body { padding: 4rem 0 7rem; }
+/* Layout — mobile: stacked */
+.mf-body { padding: 2.5rem 0 5rem; }
 .mf-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 5rem;
-  align-items: start;
-}
-
-/* Sidebar */
-.mf-sidebar {
-  position: sticky;
-  top: calc(var(--nav-h) + 2rem);
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 2.5rem;
 }
-.mf-figure { border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+/* Sidebar — horizontal scroll on mobile */
+.mf-sidebar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+.mf-sidebar > .eyebrow {
+  grid-column: 1 / -1;
+}
+
+.mf-figure { border-top: 1px solid var(--rule); padding-top: 0.8rem; }
 .mf-figure__img {
   width: 100%;
-  height: 110px;
+  height: 100px;
   object-fit: cover;
   object-position: top;
   filter: grayscale(100%);
-  opacity: 0.75;
-  margin-bottom: 0.5rem;
+  opacity: 0.72;
+  margin-bottom: 0.45rem;
   transition: filter 0.3s, opacity 0.3s;
 }
 .mf-figure__img:hover { filter: grayscale(0%); opacity: 1; }
 .mf-figure__name {
   font-family: var(--font-cond);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -86,42 +93,41 @@
 /* Article */
 .mf-article p {
   font-family: var(--font-body);
-  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  font-size: clamp(0.95rem, 3.5vw, 1.05rem);
   font-weight: 300;
   line-height: 1.9;
   color: var(--ink-3);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.3rem;
 }
 .mf-article p strong { font-weight: 500; color: var(--ink); }
 
 .mf-drop::first-letter {
   font-family: var(--font-serif);
-  font-size: 4.8rem;
+  font-size: 4.2rem;
   font-weight: 700;
   float: left;
-  line-height: 0.8;
+  line-height: 0.82;
   margin-right: 0.08em;
-  margin-top: 0.06em;
+  margin-top: 0.08em;
   color: var(--ink);
 }
 
 .mf-article h2 {
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-size: clamp(1.15rem, 4.5vw, 1.55rem);
   font-weight: 700;
   color: var(--ink);
-  margin: 3rem 0 1rem;
-  padding-top: 2rem;
+  margin: 2.5rem 0 1rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
 }
 
 .mf-pullquote {
-  margin: 2.5rem 0;
-  padding-left: 0;
+  margin: 2rem 0;
 }
 .mf-pullquote p {
   font-family: var(--font-serif);
-  font-size: clamp(1.1rem, 1.8vw, 1.35rem) !important;
+  font-size: clamp(1rem, 4vw, 1.3rem) !important;
   font-style: italic;
   color: var(--ink) !important;
   line-height: 1.55;
@@ -139,22 +145,22 @@
 
 .mf-ruled {
   border-left: 3px solid var(--ink);
-  padding-left: 1.4rem;
-  margin: 2rem 0;
+  padding-left: 1.2rem;
+  margin: 1.8rem 0;
   font-family: var(--font-serif);
-  font-size: clamp(0.98rem, 1.5vw, 1.12rem);
+  font-size: clamp(0.95rem, 3.5vw, 1.08rem);
   font-style: italic;
   color: var(--ink);
   line-height: 1.65;
 }
 
 .mf-close {
-  margin-top: 4rem;
-  padding-top: 2.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
 }
 .mf-close p {
   font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 2.8vw, 2rem) !important;
+  font-size: clamp(1.3rem, 5.5vw, 2rem) !important;
   font-style: italic;
   font-weight: 700;
   color: var(--ink) !important;
@@ -162,7 +168,7 @@
 }
 .mf-close span {
   font-family: var(--font-cond);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -171,11 +177,31 @@
   margin-top: 0.5rem;
 }
 
-@media (max-width: 900px) {
-  .mf-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .mf-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+/* ── TABLET+ ── */
+@media (min-width: 640px) {
+  .mf-hero { padding: 3.5rem 0 3rem; }
+  .mf-body { padding: 3.5rem 0 6rem; }
+  .mf-sidebar { grid-template-columns: repeat(4, 1fr); }
   .mf-sidebar > .eyebrow { grid-column: 1 / -1; }
+  .mf-figure__img { height: 120px; }
 }
-@media (max-width: 500px) {
-  .mf-sidebar { grid-template-columns: 1fr; }
+
+/* ── DESKTOP ── */
+@media (min-width: 900px) {
+  .mf-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .mf-sidebar {
+    position: sticky;
+    top: calc(var(--nav-h) + 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    grid-template-columns: unset;
+  }
+  .mf-sidebar > .eyebrow { grid-column: unset; }
+  .mf-figure__img { height: 110px; }
 }
