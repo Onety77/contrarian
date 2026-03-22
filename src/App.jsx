@@ -4,7 +4,8 @@ import Nav from './components/Nav'
 import Home from './pages/Home'
 import Manifesto from './pages/Manifesto'
 import Community from './pages/Community'
-import { ReadingRoom, Tracker, TestPage, GamePage } from './pages/InnerPages'
+import ReadingRoom from './pages/ReadingRoom'
+import { Tracker, TestPage, GamePage } from './pages/InnerPages'
 
 function ScrollReset() {
   const { pathname } = useLocation()

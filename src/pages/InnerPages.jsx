@@ -1,90 +1,9 @@
-// ── READING ROOM ──────────────────────────────────────────────
+// ── TRACKER ───────────────────────────────────────────────────
 import React, { useEffect, useRef, useState } from 'react'
 import { db } from '../firebase'
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import TheRiver from './TheRiver'
 
-const SEED_ARTICLES = [
-  { id:'s1', title:'The Psychology of Consensus',      category:'Psychology',    excerpt:'Why the human brain is wired to seek agreement, and what it costs when markets are at their most dangerous extremes.', readTime:'6 min', date:'March 2026' },
-  { id:'s2', title:'Being Right Too Early',            category:'Market History', excerpt:'A study of the most consequential contrarian calls in financial history, and the brutal cost of timing versus thesis.',  readTime:'8 min', date:'February 2026' },
-  { id:'s3', title:'The Anatomy of a Contrarian Trade',category:'Trading',       excerpt:'What separates a genuine contrarian position from stubbornness, and how to know the difference when the market moves against you.', readTime:'7 min', date:'February 2026' },
-  { id:'s4', title:'Profiles in Independent Thought',  category:'Profiles',      excerpt:'From Galileo to Burry, the lives of history\'s most consequential contrarians share a pattern beyond mere disagreement.',  readTime:'10 min', date:'January 2026' },
-  { id:'s5', title:'What the Crowd Gets Wrong About Crypto', category:'Crypto',  excerpt:'Every cycle produces the same pattern. Understanding it does not make it easier to act on.',                           readTime:'5 min', date:'January 2026' },
-  { id:'s6', title:'The Social Cost of Being Early',   category:'Psychology',    excerpt:'The financial cost of a contrarian position is well understood. The social cost, paid in family dinners and lost friendships, rarely gets discussed.', readTime:'6 min', date:'December 2025' },
-]
-
-const CATS = ['All','Psychology','Market History','Trading','Profiles','Crypto']
-
-export function ReadingRoom() {
-  const ref = useRef(null)
-  const [articles, setArticles] = useState(SEED_ARTICLES)
-  const [cat, setCat]           = useState('All')
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }),
-      { threshold: 0.06 }
-    )
-    ref.current?.querySelectorAll('.rv').forEach(el => obs.observe(el))
-    return () => obs.disconnect()
-  }, [cat])
-
-  useEffect(() => {
-    async function load() {
-      try {
-        const q    = query(collection(db,'articles'), orderBy('date','desc'))
-        const snap = await getDocs(q)
-        if (!snap.empty) setArticles(snap.docs.map(d => ({ id:d.id, ...d.data() })))
-      } catch(e) {}
-    }
-    load()
-  }, [])
-
-  const filtered = cat === 'All' ? articles : articles.filter(a => a.category === cat)
-
-  return (
-    <div className="inner-page page" ref={ref}>
-      <div className="inner-hero">
-        <div className="wrap">
-          <div className="inner-hero__top rv">
-            <span className="eyebrow">Reading Room</span>
-          </div>
-          <div className="rule--red rv d1" style={{margin:'1rem 0 1.2rem'}} />
-          <h1 className="inner-hero__title rv d1">Ideas worth<br /><em>sitting with.</em></h1>
-          <div className="rule--thick rv d2" style={{margin:'1rem 0 1.5rem'}} />
-          <p className="inner-hero__deck rv d2">Essays on contrarian thinking, market history, and the psychology of independent thought.</p>
-        </div>
-      </div>
-
-      <div className="inner-body wrap">
-        <div className="filter-row rv">
-          {CATS.map(c => (
-            <button key={c} className={`filter-btn ${cat===c?'filter-btn--on':''}`} onClick={() => setCat(c)}>{c}</button>
-          ))}
-        </div>
-
-        <div className="article-grid">
-          {filtered.map((a, i) => (
-            <div key={a.id} className={`article-card rv d${(i%3)+1}`}>
-              <div className="article-card__top">
-                <span className="eyebrow" style={{fontSize:'0.54rem'}}>{a.category}</span>
-                <span className="article-card__date">{a.date}</span>
-              </div>
-              <div className="rule" style={{margin:'0.7rem 0'}} />
-              <h3 className="article-card__title">{a.title}</h3>
-              <p className="article-card__excerpt">{a.excerpt}</p>
-              <div className="article-card__foot">
-                <span className="article-card__time">{a.readTime} read</span>
-                <span className="article-card__cta">Read →</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ── TRACKER ───────────────────────────────────────────────────
 const SEED_ENTRIES = [
   { id:'t1', date:'Nov 2021', consensus:'Bitcoin will hit $100k by end of year. Multiple analysts in agreement.',                          outcome:'Bitcoin peaked at $69k then dropped 75% over the following year.',               verdict:'wrong' },
   { id:'t2', date:'Jan 2009', consensus:'Bitcoin is a toy. No serious monetary use case. Will never gain mainstream traction.',           outcome:'Bitcoin became a $1T+ asset class adopted by sovereign nations and Fortune 500.', verdict:'wrong' },
@@ -149,10 +68,12 @@ export function Tracker() {
                   <span className="tracker-row__lbl eyebrow" style={{fontSize:'0.52rem',color:'var(--ink-faint)'}}>The Consensus</span>
                   <p className="tracker-row__txt">{e.consensus}</p>
                 </div>
-                <span className={`tracker-verdict ${e.verdict==='wrong'?'tracker-verdict--wrong':'tracker-verdict--right'}`}>
-                  {e.verdict==='wrong'?'Wrong':'Right'}
-                </span>
-                <span className="tracker-toggle">{open===e.id?'−':'+'}</span>
+                <div className="tracker-row__actions">
+                  <span className={`tracker-verdict ${e.verdict==='wrong'?'tracker-verdict--wrong':'tracker-verdict--right'}`}>
+                    {e.verdict==='wrong'?'Wrong':'Right'}
+                  </span>
+                  <span className="tracker-toggle">{open===e.id?'−':'+'}</span>
+                </div>
               </div>
               {open===e.id && (
                 <div className="tracker-outcome">
@@ -289,8 +210,6 @@ export function TestPage() {
 }
 
 // ── GAME PAGE ─────────────────────────────────────────────────
-import TheRiver from './TheRiver'
-
 export function GamePage() {
   const ref = useRef(null)
   useEffect(() => {
@@ -315,39 +234,6 @@ export function GamePage() {
       </div>
       <div className="inner-body">
         <TheRiver />
-      </div>
-    </div>
-  )
-}
-
-// ── COMMUNITY PAGE ────────────────────────────────────────────
-export function CommunityPage() {
-  const ref = useRef(null)
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }),
-      { threshold: 0.07 }
-    )
-    ref.current?.querySelectorAll('.rv').forEach(el => obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
-
-  return (
-    <div className="inner-page page" ref={ref}>
-      <div className="inner-hero">
-        <div className="wrap">
-          <div className="inner-hero__top rv"><span className="eyebrow">The Few</span></div>
-          <div className="rule--red rv d1" style={{margin:'1rem 0 1.2rem'}} />
-          <h1 className="inner-hero__title rv d1">Put it<br /><em>on record.</em></h1>
-          <div className="rule--thick rv d2" style={{margin:'1rem 0 1.5rem'}} />
-          <p className="inner-hero__deck rv d2">Not a chat. Not a forum. A public record of independent thought, timestamped and permanent.</p>
-        </div>
-      </div>
-      <div className="inner-body wrap">
-        <div className="comm-slot rv">
-          <span className="eyebrow">Community Module</span>
-          <p className="comm-slot__note">Coming next. The Few will put their theses on record here.</p>
-        </div>
       </div>
     </div>
   )

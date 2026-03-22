@@ -31,17 +31,17 @@ const HITBOX_PAD = 3   // shrink hitbox by this many px each side (forgiveness)
 // ═══════════════════════════════════════════════════════════════════════════
 const TIERS = [
   { name:'Easy',          dist:0,     speed:3.2,  gap:180 },
-  { name:'Normal',        dist:500,   speed:4.0,  gap:160 },
-  { name:'Hard',          dist:900,   speed:5.5,  gap:140 },
-  { name:'Harder',        dist:1500,   speed:6.3,  gap:122 },
-  { name:'Insane',        dist:2200,   speed:7.2,  gap:108 },
-  { name:'Extreme',       dist:3000,  speed:8.2,  gap:95  },
-  { name:'Demon',         dist:4000,  speed:9.4,  gap:84  },
-  { name:'Easy Demon',    dist:4300,  speed:10.6, gap:74  },
-  { name:'Medium Demon',  dist:4800,  speed:12.0, gap:66  },
-  { name:'Hard Demon',    dist:5000,  speed:13.6, gap:58  },
-  { name:'Insane Demon',  dist:7000,  speed:15.2, gap:50  },
-  { name:'IMPOSSIBLE',    dist:9999,  speed:17.5, gap:40  },
+  { name:'Normal',        dist:250,   speed:4.0,  gap:170 },
+  { name:'Hard',          dist:500,   speed:4.5,  gap:160 },
+  { name:'Harder',        dist:1000,   speed:5.0,  gap:140 },
+  { name:'Insane',        dist:1300,   speed:5.5,  gap:130 },
+  { name:'Extreme',       dist:1700,  speed:6.0,  gap:120  },
+  { name:'Demon',         dist:2100,  speed:6.3,  gap:120 },
+  { name:'Easy Demon',    dist:2500,  speed:6.8, gap:120 },
+  { name:'Medium Demon',  dist:3000,  speed:7.0, gap:120 },
+  { name:'Hard Demon',    dist:4000,  speed:7.0, gap:100 },
+  { name:'Insane Demon',  dist:4500,  speed:7.5, gap:90 },
+  { name:'IMPOSSIBLE',    dist:5000,  speed:8, gap:80  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1324,7 +1324,7 @@ export default function TheRiver() {
       }
 
       // Engine audio
-      if(holding){SFX.startEngine();SFX.thrustUpdate(s.vy,spd)}else SFX.stopEngine()
+      if(!holding) SFX.stopEngine()
 
       // Trail
       s.trail.unshift({x:PLAYER_X,y:s.py});if(s.trail.length>TRAIL_LEN)s.trail.pop()
