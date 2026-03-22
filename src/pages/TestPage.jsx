@@ -2,24 +2,110 @@ import React, { useEffect, useRef, useState } from 'react'
 import './TestPage.css'
 
 const QS = [
-  { id:1, scenario:'Every analyst you follow is calling this the greatest bull run in a decade. Your feed is euphoric. The trade feels obvious.', q:'What do you do?', opts:[{t:"Buy in. You don't want to miss it.",s:0},{t:'Wait and watch. Something feels off.',s:2},{t:'Start looking for the exit. Euphoria always ends.',s:3},{t:'Ask what the bears are saying.',s:2}] },
-  { id:2, scenario:"A position you've held for 6 months is down 40%. Your thesis hasn't changed. The crowd says you're delusional.", q:'How do you respond?', opts:[{t:"Sell. Protect what's left.",s:0},{t:'Hold. The thesis is intact.',s:3},{t:'Buy more. The mispricing is bigger now.',s:3},{t:'Panic. The crowd might be right.',s:0}] },
-  { id:3, scenario:"Your family is asking why you haven't sold yet. They think you're throwing money away. The discomfort is real.", q:'What wins?', opts:[{t:'The relationship. You fold.',s:0},{t:'You explain your thesis again.',s:1},{t:"You hold. You've stopped explaining.",s:3},{t:'You doubt yourself for the first time.',s:1}] },
-  { id:4, scenario:'The market is crashing. Your timeline is panic. A respected voice says this is the end of the cycle.', q:'Your move?', opts:[{t:'Sell everything.',s:0},{t:'Do nothing. Wait for data.',s:2},{t:'Start building a shopping list.',s:3},{t:'Follow the respected voice.',s:0}] },
-  { id:5, scenario:"You see something nobody else is talking about. The opportunity is clear to you but invisible to the crowd.", q:'What stops you?', opts:[{t:'Nothing. You move.',s:3},{t:'You wait for confirmation.',s:1},{t:'You wait for someone else to notice first.',s:0},{t:'You research harder before acting.',s:2}] },
-  { id:6, scenario:'You were wrong. A contrarian position you held with conviction failed. The crowd was right.', q:'What do you take from it?', opts:[{t:'The crowd is sometimes right. Adjust.',s:3},{t:'Never go against the consensus again.',s:0},{t:'Examine the thesis, not the outcome.',s:3},{t:'Ignore it and move on.',s:1}] },
-  { id:7, scenario:"Everyone around you has made money following the trend. You've been sitting out. The pressure to join is enormous.", q:'What happens next?', opts:[{t:'You join. FOMO wins.',s:0},{t:'You watch. Your time will come.',s:3},{t:"You look for what they're missing.",s:3},{t:'You question your judgment.',s:1}] },
+  {
+    id: 1,
+    scenario: 'A widely respected expert — someone you admire — publicly states the opposite of what you believe. Their reasoning sounds solid. The audience agrees.',
+    q: 'What happens to your position?',
+    opts: [
+      { t: 'It shakes you. You start to wonder if you missed something.', s: 1 },
+      { t: 'You go back to your own reasoning and check it against theirs.', s: 3 },
+      { t: 'You quietly change your view. They probably know more than you.', s: 0 },
+      { t: 'You become more curious about why they are wrong.', s: 3 },
+    ]
+  },
+  {
+    id: 2,
+    scenario: 'You are at a dinner with people you respect. A topic comes up where you hold a strong, unpopular view. Everyone at the table disagrees with you, including people who are smarter and more experienced.',
+    q: 'What do you do?',
+    opts: [
+      { t: 'You say nothing. This is not the right time.', s: 0 },
+      { t: 'You voice your view once, clearly, then let it go.', s: 2 },
+      { t: 'You defend your position for as long as it takes.', s: 2 },
+      { t: 'You enjoy it. This is exactly where interesting conversations happen.', s: 3 },
+    ]
+  },
+  {
+    id: 3,
+    scenario: 'You have believed something for years — about markets, people, or how the world works. New evidence suggests you might be wrong. But your identity is tied to this view.',
+    q: 'How do you handle it?',
+    opts: [
+      { t: 'You look for flaws in the new evidence first.', s: 0 },
+      { t: 'You sit with the discomfort and examine both sides honestly.', s: 3 },
+      { t: 'You update your view, even if it costs you credibility.', s: 3 },
+      { t: 'You need time. You are not ready to abandon it yet.', s: 1 },
+    ]
+  },
+  {
+    id: 4,
+    scenario: 'You are early on something — a trade, an idea, a call on where things are heading. Eighteen months pass and nothing has moved. People who mocked you are still mocking you.',
+    q: 'What does the silence tell you?',
+    opts: [
+      { t: 'That you were probably wrong.', s: 0 },
+      { t: 'Nothing yet. Time alone does not invalidate a thesis.', s: 3 },
+      { t: 'That the market is irrational and you just need to wait longer.', s: 1 },
+      { t: 'You go back to first principles and check if the thesis still holds.', s: 3 },
+    ]
+  },
+  {
+    id: 5,
+    scenario: "Everyone in your industry is moving in the same direction. The momentum feels unstoppable. Saying otherwise would damage your reputation and your relationships.",
+    q: 'What do you do with what you actually think?',
+    opts: [
+      { t: 'You say nothing. The cost is too high.', s: 0 },
+      { t: 'You find subtle ways to signal your doubts without full exposure.', s: 1 },
+      { t: 'You say what you think, clearly, and accept the consequences.', s: 3 },
+      { t: 'You wait until you see the first crack, then speak.', s: 2 },
+    ]
+  },
+  {
+    id: 6,
+    scenario: 'A market you have been watching crashes exactly as you predicted. Friends who ignored your warnings have lost significant money. You were right.',
+    q: 'What is your honest internal response?',
+    opts: [
+      { t: 'Relief. Being vindicated matters to you more than you admit.', s: 1 },
+      { t: 'You feel very little. You already knew. The outcome was expected.', s: 3 },
+      { t: 'Quiet satisfaction, but mostly you are focused on what comes next.', s: 3 },
+      { t: 'You want to tell people. It is hard to resist.', s: 0 },
+    ]
+  },
+  {
+    id: 7,
+    scenario: 'You hold a position that has been wrong for long enough that the people who trust your judgment are starting to lose faith in you, not just in the trade.',
+    q: 'What matters most to you right now?',
+    opts: [
+      { t: 'Protecting the relationships. You fold.', s: 0 },
+      { t: 'The thesis. If it is still right, none of the rest matters.', s: 3 },
+      { t: 'Understanding whether you are right or just stubborn.', s: 3 },
+      { t: 'Buying time. You need them to trust you a little longer.', s: 1 },
+    ]
+  },
 ]
 
 const PROFILES = [
-  { min:0, max:7,   type:'The Follower',    desc:"You feel the pull of consensus strongly, and that is not a flaw. Most people do. The crowd provides comfort, social proof, and safety. The contrarian path requires a settled relationship with being alone in a thesis. You are not there yet. But you know it now." },
-  { min:8, max:13,  type:'The Doubter',     desc:"You feel the discomfort of consensus but have not yet learned to trust that feeling. You see what the crowd misses, sometimes, but social pressure keeps winning. You are closer to the contrarian than you think. The gap is not intelligence. It is conviction." },
-  { min:14, max:17, type:'The Independent', desc:"You think for yourself with more consistency than most. You have been right when the crowd was wrong, and you have paid the social price of it. You are not fully comfortable with the isolation yet, but you are learning to sit with it." },
-  { min:18, max:21, type:'The Contrarian',  desc:"You do not need the crowd's approval. You have been the black sheep, the underdog, the one at the dinner table holding a position nobody else wanted to hear. You have been proven right in the long run often enough to trust your own judgment over the noise." },
+  {
+    min: 0, max: 7,
+    type: 'The Follower',
+    desc: 'You feel the pull of consensus strongly, and that is not a flaw. Most people do. The crowd provides comfort, social proof, and the safety of shared blame when things go wrong. The contrarian path requires a settled relationship with being isolated in a correct belief — often for years. You are not there yet. But the fact that you took this test suggests you are looking for something the crowd is not giving you.'
+  },
+  {
+    min: 8, max: 13,
+    type: 'The Doubter',
+    desc: "You see the cracks in the consensus more often than most. The problem is not what you think — it is what you do with it. Social pressure keeps winning at the moments that matter. You fold at the dinner table. You go quiet in the meeting. You wait for someone else to say it first. The gap between you and the contrarian is not intelligence. It is the willingness to pay the social cost of being right before anyone else is."
+  },
+  {
+    min: 14, max: 17,
+    type: 'The Independent',
+    desc: "You think for yourself with more consistency than most people manage. You have held positions under pressure that most people would have abandoned. You have been the uncomfortable voice at the table and you have learned to live with it. What separates you from the fully formed contrarian is not conviction — it is comfort. You still feel the isolation more than you would like. That feeling fades with time and with being right often enough to trust your own signal."
+  },
+  {
+    min: 18, max: 21,
+    type: 'The Contrarian',
+    desc: "You do not need the crowd's approval to hold a position and you have proven it under real pressure, not hypothetical pressure. You have sat at the table and said the thing nobody wanted to hear. You have held when the relationships around the thesis started to fray. You have been vindicated often enough that disagreement no longer reads as danger — it reads as signal. The crowd moving against you, at this point, is almost a reason to look harder at whether you are right."
+  },
 ]
 
 export default function TestPage() {
-  const ref = useRef(null)
+  const ref                     = useRef(null)
   const [started, setStarted]   = useState(false)
   const [q, setQ]               = useState(0)
   const [scores, setScores]     = useState([])
@@ -42,15 +128,18 @@ export default function TestPage() {
       setScores(next)
       setSelected(null)
       if (q + 1 >= QS.length) {
-        const total = next.reduce((a,b)=>a+b,0)
-        setResult({ total, profile: PROFILES.find(p=>total>=p.min&&total<=p.max) })
+        const total = next.reduce((a, b) => a + b, 0)
+        setResult({ total, profile: PROFILES.find(p => total >= p.min && total <= p.max) })
       } else {
-        setQ(n=>n+1)
+        setQ(n => n + 1)
       }
     }, 380)
   }
 
-  const reset = () => { setStarted(false); setQ(0); setScores([]); setSelected(null); setResult(null) }
+  const reset = () => {
+    setStarted(false); setQ(0); setScores([]); setSelected(null); setResult(null)
+  }
+
   const pct = (q / QS.length) * 100
 
   return (
@@ -64,14 +153,17 @@ export default function TestPage() {
       </div>
 
       <div className="wrap test-body">
+
         {!started && !result && (
           <div className="test-intro">
             <div className="test-intro__left rv">
-              <p className="test-intro__desc">This is not a trivia quiz. It is a series of real pressure moments designed to reveal how you actually think versus how the crowd thinks. Your result will not be a percentage. It will be a profile.</p>
-              <button className="btn btn-gold" onClick={()=>setStarted(true)}>Begin the Test</button>
+              <p className="test-intro__desc">
+                This is not a trivia quiz. It is a series of pressure moments designed to reveal how you actually behave when the crowd is against you — not how you think you would behave. Most people overestimate how contrarian they are. The test is built to find the gap.
+              </p>
+              <button className="btn btn-gold" onClick={() => setStarted(true)}>Begin the Test</button>
             </div>
             <div className="test-intro__right rv d2">
-              {PROFILES.map(p=>(
+              {PROFILES.map(p => (
                 <div key={p.type} className="test-profile-pill">
                   <span>{p.type}</span>
                 </div>
@@ -84,9 +176,9 @@ export default function TestPage() {
         {started && !result && (
           <div className="test-quiz rv">
             <div className="test-prog">
-              <div className="test-prog__fill" style={{width:`${pct}%`}} />
+              <div className="test-prog__fill" style={{ width: `${pct}%` }} />
             </div>
-            <p className="test-prog__label">{q+1} / {QS.length}</p>
+            <p className="test-prog__label">{q + 1} / {QS.length}</p>
 
             <div className="test-q">
               <p className="test-scenario">{QS[q].scenario}</p>
@@ -94,14 +186,14 @@ export default function TestPage() {
             </div>
 
             <div className="test-opts">
-              {QS[q].opts.map((o,i)=>(
+              {QS[q].opts.map((o, i) => (
                 <button
                   key={i}
-                  className={`test-opt ${selected===o.s&&selected!==null?'test-opt--sel':''}`}
-                  onClick={()=>pick(o.s)}
-                  disabled={selected!==null}
+                  className={`test-opt ${selected === o.s && selected !== null ? 'test-opt--sel' : ''}`}
+                  onClick={() => pick(o.s)}
+                  disabled={selected !== null}
                 >
-                  <span className="test-opt__lt">{String.fromCharCode(65+i)}</span>
+                  <span className="test-opt__lt">{String.fromCharCode(65 + i)}</span>
                   <span className="test-opt__tx">{o.t}</span>
                 </button>
               ))}
@@ -111,15 +203,16 @@ export default function TestPage() {
 
         {result && (
           <div className="test-result rv">
-            <p className="label" style={{marginBottom:'1.5rem'}}>Your Profile</p>
+            <p className="label" style={{ marginBottom: '1.5rem' }}>Your Profile</p>
             <h2 className="test-result__type">{result.profile.type}</h2>
-            <div className="g-rule" style={{margin:'1.5rem 0'}} />
+            <div className="g-rule" style={{ margin: '1.5rem 0' }} />
             <p className="test-result__desc">{result.profile.desc}</p>
-            <div style={{marginTop:'2.5rem'}}>
+            <div style={{ marginTop: '2.5rem' }}>
               <button className="btn btn-ghost" onClick={reset}>Take It Again</button>
             </div>
           </div>
         )}
+
       </div>
     </div>
   )
